@@ -1,11 +1,15 @@
-from sklearn.neighbors import KNeighborsClassifier
+from knn import knn
+from grader import grader
 
-def findBestNeighboursNumber( x_train, x_test, y_train, y_test,max_number_of_neighbours):
+def findBestNeighboursNumber(x_train, x_test, y_train, y_test,max_number_of_neighbours,label_searched):
     solution_list =[]
+    knn_lib=knn(1)
+
     for n in range(1, max_number_of_neighbours):
-        knn_lib=KNeighborsClassifier(n)
-        knn_lib.fit(x_train,y_train.values.ravel())
-        solution_list.append(knn_lib.score(x_test,y_test))
+        knn_lib.neighbours_number=n
+        knn_lib.fit(x_train,y_train,label_searched)
+        y_predicted = knn_lib.predict(x_test)
+        solution_list.append(grader(y_predicted,y_test,False))
         print(f"{n}/{max_number_of_neighbours}")
     
     max_value = max(solution_list)
