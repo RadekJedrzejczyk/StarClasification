@@ -1,6 +1,6 @@
 from sklearn.neighbors import KNeighborsClassifier
 
-def findBestNeighboursNumber(x_train,y_train,x_test,y_test,max_number_of_neighbours):
+def findBestNeighboursNumber(x_train,x_test,y_train,y_test,max_number_of_neighbours):
     solution_list =[]
     for n in range(1, max_number_of_neighbours):
         knn_lib=KNeighborsClassifier(n)
